@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task abc {
+
+
+    def emptyList=[];
+    def test=[1,"world",true];
+    test[1]="hello";
+    println(test[0]);
+    println(test[1]);
+    println(test.toString());
+
+    test<<100;
+    println(Arrays.toString(test.toArray()));
+
+    def emptyMap=[:];
+    def testMap=["id":1,"name":"testName","isMale":"true",1:12];
+    testMap.id=2;
+    testMap["name"]="test2Name";
+    testMap[1]=13;
+    println(testMap)
+
+    def file = new File("build.gradle")
+
+
+
+    println "read file using two parameters"
+
+    file.eachLine(10, { line, lineNo ->
+
+        println "${lineNo} ${line}"
+
+    });
+
+}
+
+
